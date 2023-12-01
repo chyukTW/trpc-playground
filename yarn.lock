@@ -872,6 +872,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@tanstack/query-core@npm:5.10.0"
+  checksum: dbda02d0ebf165a2d3fd84c3d94de4d2fc037bbe36220a9848b47d9b6f35440ee00303cf3c643844240eefc53f33527530382b257b62ca97970c38fd77cc5b65
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "@tanstack/react-query@npm:5.10.0"
+  dependencies:
+    "@tanstack/query-core": 5.10.0
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 0a92fc8465d3aca4fb8bbf17f03b664b67148a4bc933d1beca5464bfbe4dbbd3f78bbdfe0524b6518e744a30570d0e25b71e1aab3e233c5ec06bd8b0b2f9f921
+  languageName: node
+  linkType: hard
+
+"@trpc/client@npm:^10.44.1":
+  version: 10.44.1
+  resolution: "@trpc/client@npm:10.44.1"
+  peerDependencies:
+    "@trpc/server": 10.44.1
+  checksum: c3277e9f6e1ff650e9da82b4f6ec1718bca86ad1d17f083a200e29ad635da7d988c9223c0ccd0c575ed1ab3cb59b47e1d83c659e3ae8f6537d3c54ea34010f2a
+  languageName: node
+  linkType: hard
+
+"@trpc/react-query@npm:^10.44.1":
+  version: 10.44.1
+  resolution: "@trpc/react-query@npm:10.44.1"
+  peerDependencies:
+    "@tanstack/react-query": ^4.18.0
+    "@trpc/client": 10.44.1
+    "@trpc/server": 10.44.1
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: acc92200221d87c1a26d66e6f555965f985c90245570db0c3e64c5683c8f6947386b943c91d1539ca1304dd7b4aabf29998c61e55c9137a3014ab24eb5c44232
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.20.4":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -1699,6 +1739,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "client@workspace:packages/client"
   dependencies:
+    "@tanstack/react-query": ^5.10.0
+    "@trpc/client": ^10.44.1
+    "@trpc/react-query": ^10.44.1
     "@types/react": ^18.2.37
     "@types/react-dom": ^18.2.15
     "@vitejs/plugin-react": ^4.2.0

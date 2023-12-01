@@ -1,6 +1,10 @@
 {
   "name": "trpc-playground",
-  "packageManager": "yarn@3.7.0",
+  "packageManager": "yarn@3.6.1",
+  "scripts": {
+    "client": "yarn workspace client",
+    "server": "yarn workspace server"
+  },
   "dependencies": {
     "typescript": "^5.3.2"
   },

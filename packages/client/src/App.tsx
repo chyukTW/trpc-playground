@@ -5,7 +5,7 @@ import { httpLink } from '@trpc/client';
 import { useState } from 'react';
 
 const Hello = () => {
-  const response = trpc.hi.useQuery({name: 'twinny'});
+  const response = trpc.hello.useQuery({name: 'twinny'});
 
   return <p>{response.data?.text}</p>
 }

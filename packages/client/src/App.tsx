@@ -10,16 +10,49 @@ const Hello = () => {
   return <p>{response.data?.text}</p>;
 };
 
-const Number = () => {
-  const [number, setNumber] = useState<number>();
+const Chats = () => {
+  const [messages, setMessages] = useState<{id: number, message: string}[]>();
 
-  trpc.randomNumber.useSubscription(undefined, {
-    onData: ({randomNumber})=> {
-      setNumber(randomNumber);
+  trpc.onMessages.useSubscription(undefined, {
+    onData: ({ messages })=> {
+      setMessages(messages);
     }
   });
 
-  return <p>{number}</p>;
+  return <div>
+    {
+      messages?.map(({id, message})=> {
+        return <p key={id}>{message}</p>;
+      })
+    }
+  </div>;
+};
+
+const Input = () => {
+  const [message, setMessage] = useState('');
+
+  const sendMessage = trpc.sendMessage.useMutation();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    if(!message) return;
+
+    e.preventDefault();
+
+    await sendMessage.mutateAsync({ message });
+
+    setMessage('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input onChange={handleChange} type='text'/>
+      <input type="submit"/>
+    </form>
+  );
 };
 
 function App() {
@@ -50,7 +83,8 @@ function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <Hello />
-        <Number />
+        <Chats />
+        <Input />
       </QueryClientProvider>
     </trpc.Provider>   
   );

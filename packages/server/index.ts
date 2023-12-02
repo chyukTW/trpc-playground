@@ -6,6 +6,21 @@ import cors from 'cors';
 import { WebSocketServer } from 'ws';
 import { z } from 'zod';
 
+// TODO
+// post message
+// subscribe messages
+
+let id = 0;
+
+const db = {
+  messages: [
+    {
+      id: ++id,
+      message: 'hi',
+    },
+  ],
+};
+
 export type AppRouter = typeof appRouter;
 
 type Context = Awaited<ReturnType<typeof createContext>>;
@@ -22,16 +37,19 @@ const appRouter = router({
       text: `Hello ${input.name}`,
     };
   }),
-  randomNumber: procedure.subscription(() => {
-    return observable<{ randomNumber: number }>((emit) => {
+  onMessages: procedure.subscription(() => {
+    return observable<{ messages: { id: number; message: string }[] }>((emit) => {
       const timer = setInterval(() => {
-        emit.next({ randomNumber: Math.random() });
+        emit.next({ messages: db.messages });
       }, 700);
 
       return () => {
         clearInterval(timer);
       };
     });
+  }),
+  sendMessage: procedure.input(z.object({ message: z.string() })).mutation(({ input }) => {
+    db.messages.push({ id: ++id, message: input.message });
   }),
 });
 

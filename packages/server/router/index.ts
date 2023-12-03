@@ -20,12 +20,12 @@ const { procedure, router } = t;
 
 // routers
 export const appRouter = router({
-  hello: procedure.input(z.object({ name: z.string() })).query(({ input }) => {
-    return {
-      text: `Hello ${input.name}`,
-    };
-  }),
-  onMessages: procedure.subscription(() => {
+  sendMessage: procedure
+    .input(z.object({ message: z.string() }))
+    .mutation(({ input: { message } }) => {
+      db.insert(messages).values({ message }).run();
+    }),
+  subscribeMessages: procedure.subscription(() => {
     return observable<{ messages: Message[] }>((emit) => {
       const timer = setInterval(() => {
         emit.next({ messages: db.select().from(messages).all() });
@@ -36,9 +36,4 @@ export const appRouter = router({
       };
     });
   }),
-  sendMessage: procedure
-    .input(z.object({ message: z.string() }))
-    .mutation(({ input: { message } }) => {
-      db.insert(messages).values({ message }).run();
-    }),
 });

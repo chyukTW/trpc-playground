@@ -1,19 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createWSClient, httpLink, splitLink, wsLink } from '@trpc/client';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { queryClient, trpcClient } from './client';
 import { trpc } from './trpc';
-
-const Hello = () => {
-  const response = trpc.hello.useQuery({name: 'twinny'});
-
-  return <p>{response.data?.text}</p>;
-};
 
 const Chats = () => {
   const [messages, setMessages] = useState<{id: number, message: string}[]>();
 
-  trpc.onMessages.useSubscription(undefined, {
+  trpc.subscribeMessages.useSubscription(undefined, {
     onData: ({ messages })=> {
       setMessages(messages);
     }
@@ -49,40 +43,16 @@ const Input = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input onChange={handleChange} type='text'/>
+      <input onChange={handleChange} type='text' value={message}/>
       <input type="submit"/>
     </form>
   );
 };
 
-function App() {
-  const [queryClient] = useState(() => new QueryClient());
-
-  const [trpcClient] = useState(() =>
-    trpc.createClient({
-      links: [  
-        splitLink({
-          condition(op) {
-            return op.type === 'subscription';
-          },
-          false: httpLink({
-            url: 'http://localhost:2022',
-          }),
-          true: wsLink({
-            client: createWSClient({
-              url: 'ws://localhost:2022',
-            })
-          })
-        }),
-        
-      ],
-    }),
-  );
-
+function App() {  
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <Hello />
         <Chats />
         <Input />
       </QueryClientProvider>

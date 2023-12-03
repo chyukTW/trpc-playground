@@ -4,24 +4,23 @@ import { applyWSSHandler } from '@trpc/server/adapters/ws';
 import { observable } from '@trpc/server/observable';
 import Database from 'better-sqlite3';
 import cors from 'cors';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { WebSocketServer } from 'ws';
 import { z } from 'zod';
 
+// table
+const messages = sqliteTable('messages', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  message: text('message').notNull(),
+});
+
+export type Message = typeof messages.$inferSelect;
+export type InsertMessage = typeof messages.$inferInsert;
+
 // database
 const sqlite = new Database('sqlite.db');
-
-sqlite.prepare('DELETE FROM messages;').run();
-
-sqlite
-  .prepare(
-    'CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)',
-  )
-  .run();
-
-const insertMessage = sqlite.prepare('INSERT INTO messages (message) VALUES (@message)');
-const selectMessages = sqlite.prepare<{ id: number; message: string }[]>(
-  'SELECT * FROM messages LIMIT 30',
-);
+const db = drizzle(sqlite);
 
 export type AppRouter = typeof appRouter;
 
@@ -41,7 +40,8 @@ const appRouter = router({
   onMessages: procedure.subscription(() => {
     return observable<{ messages: { id: number; message: string }[] }>((emit) => {
       const timer = setInterval(() => {
-        emit.next({ messages: selectMessages.all() as { id: number; message: string }[] });
+        // emit.next({ messages: selectMessages.all() as { id: number; message: string }[] });
+        emit.next({ messages: db.select().from(messages).all() });
       }, 700);
 
       return () => {
@@ -50,7 +50,8 @@ const appRouter = router({
     });
   }),
   sendMessage: procedure.input(z.object({ message: z.string() })).mutation(({ input }) => {
-    insertMessage.run({ message: input.message });
+    // insertMessage.run({ message: input.message });
+    db.insert(messages).values({ message: input.message }).run();
   }),
 });
 

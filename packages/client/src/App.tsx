@@ -1,5 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
 
 import { queryClient, trpcClient } from './client';
 import { trpc } from './trpc';
@@ -7,11 +7,22 @@ import { trpc } from './trpc';
 const Chats = () => {
   const [messages, setMessages] = useState<{id: number, message: string}[]>();
 
+  
+  const { refetch } = trpc.fetchMessages.useQuery({limit: 10}, { enabled: false });
+
+  // subscribe messages
   trpc.subscribeMessages.useSubscription(undefined, {
     onData: ({ messages })=> {
       setMessages(messages);
-    }
+    },
   });
+
+  // set initial messages
+  useEffect(()=> {
+    refetch().then(({data: initialMessages })=> {
+      setMessages(initialMessages);
+    });
+  }, []);
 
   return <div>
     {

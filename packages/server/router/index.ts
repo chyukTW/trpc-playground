@@ -1,11 +1,10 @@
 import { initTRPC } from '@trpc/server';
 import { observable } from '@trpc/server/observable';
-import { desc } from 'drizzle-orm';
 import EventEmitter from 'events';
 import { z } from 'zod';
 
-import { db } from '../db';
-import { Message, messages } from '../db/schema';
+import { getMessages, insertMessage } from '../db';
+import { Message } from '../db/schema';
 
 // custom event
 const event = new EventEmitter();
@@ -25,10 +24,13 @@ const { procedure, router } = t;
 
 // routers
 export const appRouter = router({
+  fetchMessages: procedure.input(z.object({ limit: z.number() })).query(({ input: { limit } }) => {
+    return getMessages(limit);
+  }),
   sendMessage: procedure
     .input(z.object({ message: z.string() }))
     .mutation(async ({ ctx: { event }, input: { message } }) => {
-      await db.insert(messages).values({ message });
+      await insertMessage(message);
 
       event.emit(e.sendMessage, message);
 
@@ -37,11 +39,7 @@ export const appRouter = router({
   subscribeMessages: procedure.subscription(({ ctx: { event } }) => {
     return observable<{ messages: Message[] }>((emit) => {
       const listener = () => {
-        emit.next({
-          messages: [
-            ...db.select().from(messages).orderBy(desc(messages.id)).limit(10).all(),
-          ].reverse(),
-        });
+        emit.next({ messages: getMessages(10) });
       };
 
       event.on(e.sendMessage, listener);

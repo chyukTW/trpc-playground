@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@trpc/server": "^10.44.1",
+    "better-sqlite3": "^9.2.0",
     "cors": "^2.8.5",
     "ws": "^8.14.2",
     "zod": "^3.0.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
     "@types/cors": "^2.8.13",
     "@types/node": "^18.16.16",
     "@types/ws": "^8",

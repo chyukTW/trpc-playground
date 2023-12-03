@@ -7,8 +7,7 @@ import { trpc } from './trpc';
 const Chats = () => {
   const [messages, setMessages] = useState<{id: number, message: string}[]>();
 
-  
-  const { refetch } = trpc.fetchMessages.useQuery({limit: 10}, { enabled: false });
+  const { refetch } = trpc.fetchMessages.useQuery({ limit: 10 }, { enabled: false });
 
   // subscribe messages
   trpc.subscribeMessages.useSubscription(undefined, {
@@ -19,18 +18,20 @@ const Chats = () => {
 
   // set initial messages
   useEffect(()=> {
-    refetch().then(({data: initialMessages })=> {
+    refetch().then(({ data: initialMessages })=> {
       setMessages(initialMessages);
     });
   }, []);
 
-  return <div>
-    {
-      messages?.map(({id, message})=> {
-        return <p key={id}>{message}</p>;
-      })
-    }
-  </div>;
+  return (
+    <div>
+      {
+        messages?.map(({ id, message })=> {
+          return <p key={id}>{message}</p>;
+        })
+      }
+    </div>
+  );
 };
 
 const Input = () => {

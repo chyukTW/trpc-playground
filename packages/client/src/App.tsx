@@ -4,8 +4,12 @@ import {  useEffect, useState } from 'react';
 import { queryClient, trpcClient } from './client';
 import { trpc } from './trpc';
 
+const getLocaleTimeString = (timestamp: string) => {
+  return new Date(new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60 * 1000).toLocaleTimeString();
+};
+
 const Chats = () => {
-  const [messages, setMessages] = useState<{id: number, message: string}[]>();
+  const [messages, setMessages] = useState<{id: number, message: string, timestamp: string}[]>();
 
   const { refetch } = trpc.fetchMessages.useQuery({ limit: 10 }, { enabled: false });
 
@@ -26,8 +30,13 @@ const Chats = () => {
   return (
     <div>
       {
-        messages?.map(({ id, message })=> {
-          return <p key={id}>{message}</p>;
+        messages?.map(({ id, message,timestamp })=> {
+          return (
+            <p key={id}>
+              {message}
+              <time style={{ fontSize: '10px', marginLeft: '12px'}}>{getLocaleTimeString(timestamp)}</time>
+            </p>
+          );
         })
       }
     </div>

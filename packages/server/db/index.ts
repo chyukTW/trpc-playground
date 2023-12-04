@@ -6,6 +6,16 @@ import { messages } from './schema';
 
 const sqlite = new Database('sqlite.db');
 
+sqlite
+  .prepare(
+    `CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+  `,
+  )
+  .run();
+
 const db = drizzle(sqlite);
 
 export const insertMessage = async (message: string) => {

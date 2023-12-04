@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.0.2",
   "scripts": {
     "client": "yarn workspace client",
-    "server": "yarn workspace server"
+    "server": "yarn workspace server",
+    "sse": "yarn workspace server_sse"
   },
   "devDependencies": {
     "@types/eslint": "^8",

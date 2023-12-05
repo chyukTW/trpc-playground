@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-type Message = {id: number, message: string};
+import { getLocaleTimeString } from '../utils';
+
+type Message = {id: number, message: string, timestamp: string};
 
 const SERVER_URL = 'http://127.0.0.1:2024';
 
@@ -54,8 +56,13 @@ const SSEChats = () => {
   return (
     <div>
       {
-        messages?.map(({ id, message })=> {
-          return <p key={id}>{message}</p>;
+        messages?.map(({ id, message,timestamp })=> {
+          return (
+            <p key={id}>
+              {message}
+              <time style={{ fontSize: '10px', marginLeft: '12px'}}>{getLocaleTimeString(timestamp)}</time>
+            </p>
+          );
         })
       }
     </div>

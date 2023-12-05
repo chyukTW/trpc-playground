@@ -3,10 +3,7 @@ import {  useEffect, useState } from 'react';
 
 import { queryClient, trpcClient } from '../client';
 import { trpc } from '../trpc';
-
-const getLocaleTimeString = (timestamp: string) => {
-  return new Date(new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60 * 1000).toLocaleTimeString();
-};
+import { getLocaleTimeString } from '../utils';
 
 const Chats = () => {
   const [messages, setMessages] = useState<{id: number, message: string, timestamp: string}[]>();

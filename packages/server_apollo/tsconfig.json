@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "strict": true,
-    "outDir": "dist"
+    "types": ["node"],
+    "skipLibCheck": true
   }
 }

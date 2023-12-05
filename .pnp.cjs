@@ -20,6 +20,10 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "server",\
       "reference": "workspace:packages/server"\
+    },\
+    {\
+      "name": "server_sse",\
+      "reference": "workspace:packages/server_sse"\
     }\
   ],\
   "enableTopLevelFallback": true,\
@@ -27,6 +31,7 @@ const RAW_RUNTIME_STATE =
   "fallbackExclusionList": [\
     ["client", ["workspace:packages/client"]],\
     ["server", ["workspace:packages/server"]],\
+    ["server_sse", ["workspace:packages/server_sse"]],\
     ["trpc-playground", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -6227,6 +6232,24 @@ const RAW_RUNTIME_STATE =
           ["drizzle-orm", "virtual:2499dbb93d824027565d71b0716c4fb8b548ad61955d0a0286bfb3c5b4058e227894b6691d96808c00f576db14870018375210362c26ee321ea99fd6ed041c74#npm:0.29.1"],\
           ["tsx", "npm:4.6.1"],\
           ["ws", "virtual:7aaba0840e0ee6eadcca7210be51518fefb68aaf25af4542b3878e6051bebbc8925f526f9c2583ab253931d328d3ccd62836c39bdeb3c996da725008c12e4d6c#npm:8.14.2"],\
+          ["zod", "npm:3.22.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["server_sse", [\
+      ["workspace:packages/server_sse", {\
+        "packageLocation": "./packages/server_sse/",\
+        "packageDependencies": [\
+          ["server_sse", "workspace:packages/server_sse"],\
+          ["@types/better-sqlite3", "npm:7.6.8"],\
+          ["@types/cors", "npm:2.8.17"],\
+          ["@types/node", "npm:18.19.0"],\
+          ["better-sqlite3", "npm:9.2.0"],\
+          ["cors", "npm:2.8.5"],\
+          ["drizzle-kit", "npm:0.20.6"],\
+          ["drizzle-orm", "virtual:2499dbb93d824027565d71b0716c4fb8b548ad61955d0a0286bfb3c5b4058e227894b6691d96808c00f576db14870018375210362c26ee321ea99fd6ed041c74#npm:0.29.1"],\
+          ["tsx", "npm:4.6.1"],\
           ["zod", "npm:3.22.4"]\
         ],\
         "linkType": "SOFT"\

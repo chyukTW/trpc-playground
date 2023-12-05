@@ -4,7 +4,8 @@
   "scripts": {
     "client": "yarn workspace client",
     "server": "yarn workspace server",
-    "sse": "yarn workspace server_sse"
+    "sse": "yarn workspace server_sse",
+    "apollo": "yarn workspace server_apollo"
   },
   "devDependencies": {
     "@types/eslint": "^8",

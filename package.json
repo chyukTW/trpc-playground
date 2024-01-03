@@ -4,6 +4,7 @@
   "scripts": {
     "client": "yarn workspace client",
     "server": "yarn workspace server",
+    "tarp": "yarn workspace tarp_server",
     "sse": "yarn workspace server_sse",
     "apollo": "yarn workspace server_apollo"
   },

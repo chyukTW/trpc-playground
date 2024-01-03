@@ -28,6 +28,10 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "server_sse",\
       "reference": "workspace:packages/server_sse"\
+    },\
+    {\
+      "name": "tarp_server",\
+      "reference": "workspace:packages/tarp_server"\
     }\
   ],\
   "enableTopLevelFallback": true,\
@@ -37,6 +41,7 @@ const RAW_RUNTIME_STATE =
     ["server", ["workspace:packages/server"]],\
     ["server_apollo", ["workspace:packages/server_apollo"]],\
     ["server_sse", ["workspace:packages/server_sse"]],\
+    ["tarp_server", ["workspace:packages/tarp_server"]],\
     ["trpc-playground", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -2447,6 +2452,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/pg", [\
+      ["npm:8.10.9", {\
+        "packageLocation": "./.yarn/cache/@types-pg-npm-8.10.9-ee8620c8e7-787be5431a.zip/node_modules/@types/pg/",\
+        "packageDependencies": [\
+          ["@types/pg", "npm:8.10.9"],\
+          ["@types/node", "npm:20.10.1"],\
+          ["pg-protocol", "npm:1.6.0"],\
+          ["pg-types", "npm:4.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/prop-types", [\
       ["npm:15.7.11", {\
         "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.11-a0a5a0025c-7519ff11d0.zip/node_modules/@types/prop-types/",\
@@ -3500,6 +3517,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["buffer-writer", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/buffer-writer-npm-2.0.0-5cd2ef55bc-fdca8e28c5.zip/node_modules/buffer-writer/",\
+        "packageDependencies": [\
+          ["buffer-writer", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["bytes", [\
       ["npm:3.1.2", {\
         "packageLocation": "./.yarn/cache/bytes-npm-3.1.2-28b8643004-a10abf2ba7.zip/node_modules/bytes/",\
@@ -4220,6 +4246,79 @@ const RAW_RUNTIME_STATE =
           ["kysely", null],\
           ["mysql2", null],\
           ["pg", null],\
+          ["postgres", null],\
+          ["sql.js", null],\
+          ["sqlite3", null]\
+        ],\
+        "packagePeers": [\
+          "@aws-sdk/client-rds-data",\
+          "@cloudflare/workers-types",\
+          "@libsql/client",\
+          "@neondatabase/serverless",\
+          "@opentelemetry/api",\
+          "@planetscale/database",\
+          "@types/aws-sdk__client-rds-data",\
+          "@types/better-sqlite3",\
+          "@types/bun-types",\
+          "@types/cloudflare__workers-types",\
+          "@types/knex",\
+          "@types/kysely",\
+          "@types/libsql__client",\
+          "@types/mysql2",\
+          "@types/neondatabase__serverless",\
+          "@types/opentelemetry__api",\
+          "@types/pg",\
+          "@types/planetscale__database",\
+          "@types/postgres",\
+          "@types/sql.js",\
+          "@types/sqlite3",\
+          "@types/vercel__postgres",\
+          "@vercel/postgres",\
+          "better-sqlite3",\
+          "bun-types",\
+          "knex",\
+          "kysely",\
+          "mysql2",\
+          "pg",\
+          "postgres",\
+          "sql.js",\
+          "sqlite3"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:0.29.1", {\
+        "packageLocation": "./.yarn/__virtual__/drizzle-orm-virtual-f2d43ad711/0/cache/drizzle-orm-npm-0.29.1-815fefb7da-26051247bf.zip/node_modules/drizzle-orm/",\
+        "packageDependencies": [\
+          ["drizzle-orm", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:0.29.1"],\
+          ["@aws-sdk/client-rds-data", null],\
+          ["@cloudflare/workers-types", null],\
+          ["@libsql/client", null],\
+          ["@neondatabase/serverless", null],\
+          ["@opentelemetry/api", null],\
+          ["@planetscale/database", null],\
+          ["@types/aws-sdk__client-rds-data", null],\
+          ["@types/better-sqlite3", null],\
+          ["@types/bun-types", null],\
+          ["@types/cloudflare__workers-types", null],\
+          ["@types/knex", null],\
+          ["@types/kysely", null],\
+          ["@types/libsql__client", null],\
+          ["@types/mysql2", null],\
+          ["@types/neondatabase__serverless", null],\
+          ["@types/opentelemetry__api", null],\
+          ["@types/pg", "npm:8.10.9"],\
+          ["@types/planetscale__database", null],\
+          ["@types/postgres", null],\
+          ["@types/sql.js", null],\
+          ["@types/sqlite3", null],\
+          ["@types/vercel__postgres", null],\
+          ["@vercel/postgres", null],\
+          ["better-sqlite3", null],\
+          ["bun-types", null],\
+          ["knex", null],\
+          ["kysely", null],\
+          ["mysql2", null],\
+          ["pg", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:8.11.3"],\
           ["postgres", null],\
           ["sql.js", null],\
           ["sqlite3", null]\
@@ -7015,6 +7114,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["obuf", [\
+      ["npm:1.1.2", {\
+        "packageLocation": "./.yarn/cache/obuf-npm-1.1.2-8db5fae8dd-53ff4ab3a1.zip/node_modules/obuf/",\
+        "packageDependencies": [\
+          ["obuf", "npm:1.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["on-finished", [\
       ["npm:2.4.1", {\
         "packageLocation": "./.yarn/cache/on-finished-npm-2.4.1-907af70f88-8e81472c50.zip/node_modules/on-finished/",\
@@ -7119,6 +7227,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["packet-reader", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/packet-reader-npm-1.0.0-e93c92246b-8504cc8c32.zip/node_modules/packet-reader/",\
+        "packageDependencies": [\
+          ["packet-reader", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["parent-module", [\
       ["npm:1.0.1", {\
         "packageLocation": "./.yarn/cache/parent-module-npm-1.0.1-1fae11b095-6ba8b25514.zip/node_modules/parent-module/",\
@@ -7210,6 +7327,141 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["pg", [\
+      ["npm:8.11.3", {\
+        "packageLocation": "./.yarn/cache/pg-npm-8.11.3-94865204fd-f15f29c8e1.zip/node_modules/pg/",\
+        "packageDependencies": [\
+          ["pg", "npm:8.11.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:8.11.3", {\
+        "packageLocation": "./.yarn/__virtual__/pg-virtual-d37af8b9e5/0/cache/pg-npm-8.11.3-94865204fd-f15f29c8e1.zip/node_modules/pg/",\
+        "packageDependencies": [\
+          ["pg", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:8.11.3"],\
+          ["@types/pg-native", null],\
+          ["buffer-writer", "npm:2.0.0"],\
+          ["packet-reader", "npm:1.0.0"],\
+          ["pg-cloudflare", "npm:1.1.1"],\
+          ["pg-connection-string", "npm:2.6.2"],\
+          ["pg-native", null],\
+          ["pg-pool", "virtual:d37af8b9e53ddbe2c9863dd9c1af9e1346d3120cc0b3c4ed5fe0d108083c88f037b0558b9bab4b47e1632d6483872856fd6305a25e0f77ca2b1ad076fe44778e#npm:3.6.1"],\
+          ["pg-protocol", "npm:1.6.0"],\
+          ["pg-types", "npm:2.2.0"],\
+          ["pgpass", "npm:1.0.5"]\
+        ],\
+        "packagePeers": [\
+          "@types/pg-native",\
+          "pg-native"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-cloudflare", [\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/pg-cloudflare-npm-1.1.1-fe242426f0-45ca0c7926.zip/node_modules/pg-cloudflare/",\
+        "packageDependencies": [\
+          ["pg-cloudflare", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-connection-string", [\
+      ["npm:2.6.2", {\
+        "packageLocation": "./.yarn/cache/pg-connection-string-npm-2.6.2-43a4a40be5-22265882c3.zip/node_modules/pg-connection-string/",\
+        "packageDependencies": [\
+          ["pg-connection-string", "npm:2.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-int8", [\
+      ["npm:1.0.1", {\
+        "packageLocation": "./.yarn/cache/pg-int8-npm-1.0.1-5cd67f3e22-a1e3a05a69.zip/node_modules/pg-int8/",\
+        "packageDependencies": [\
+          ["pg-int8", "npm:1.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-numeric", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "./.yarn/cache/pg-numeric-npm-1.0.2-9026ec3427-8899f8200c.zip/node_modules/pg-numeric/",\
+        "packageDependencies": [\
+          ["pg-numeric", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-pool", [\
+      ["npm:3.6.1", {\
+        "packageLocation": "./.yarn/cache/pg-pool-npm-3.6.1-477c9660b9-5d1b02b959.zip/node_modules/pg-pool/",\
+        "packageDependencies": [\
+          ["pg-pool", "npm:3.6.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d37af8b9e53ddbe2c9863dd9c1af9e1346d3120cc0b3c4ed5fe0d108083c88f037b0558b9bab4b47e1632d6483872856fd6305a25e0f77ca2b1ad076fe44778e#npm:3.6.1", {\
+        "packageLocation": "./.yarn/__virtual__/pg-pool-virtual-79d1a0bec8/0/cache/pg-pool-npm-3.6.1-477c9660b9-5d1b02b959.zip/node_modules/pg-pool/",\
+        "packageDependencies": [\
+          ["pg-pool", "virtual:d37af8b9e53ddbe2c9863dd9c1af9e1346d3120cc0b3c4ed5fe0d108083c88f037b0558b9bab4b47e1632d6483872856fd6305a25e0f77ca2b1ad076fe44778e#npm:3.6.1"],\
+          ["@types/pg", null],\
+          ["pg", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:8.11.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/pg",\
+          "pg"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-protocol", [\
+      ["npm:1.6.0", {\
+        "packageLocation": "./.yarn/cache/pg-protocol-npm-1.6.0-089a4b1d3c-995864cc2a.zip/node_modules/pg-protocol/",\
+        "packageDependencies": [\
+          ["pg-protocol", "npm:1.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pg-types", [\
+      ["npm:2.2.0", {\
+        "packageLocation": "./.yarn/cache/pg-types-npm-2.2.0-a3360226c4-87a84d4baa.zip/node_modules/pg-types/",\
+        "packageDependencies": [\
+          ["pg-types", "npm:2.2.0"],\
+          ["pg-int8", "npm:1.0.1"],\
+          ["postgres-array", "npm:2.0.0"],\
+          ["postgres-bytea", "npm:1.0.0"],\
+          ["postgres-date", "npm:1.0.7"],\
+          ["postgres-interval", "npm:1.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.0.1", {\
+        "packageLocation": "./.yarn/cache/pg-types-npm-4.0.1-8f922557d3-2c686ef361.zip/node_modules/pg-types/",\
+        "packageDependencies": [\
+          ["pg-types", "npm:4.0.1"],\
+          ["pg-int8", "npm:1.0.1"],\
+          ["pg-numeric", "npm:1.0.2"],\
+          ["postgres-array", "npm:3.0.2"],\
+          ["postgres-bytea", "npm:3.0.0"],\
+          ["postgres-date", "npm:2.0.1"],\
+          ["postgres-interval", "npm:3.0.0"],\
+          ["postgres-range", "npm:1.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pgpass", [\
+      ["npm:1.0.5", {\
+        "packageLocation": "./.yarn/cache/pgpass-npm-1.0.5-653e71ddd8-0a6f3bf76e.zip/node_modules/pgpass/",\
+        "packageDependencies": [\
+          ["pgpass", "npm:1.0.5"],\
+          ["split2", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["picocolors", [\
       ["npm:1.0.0", {\
         "packageLocation": "./.yarn/cache/picocolors-npm-1.0.0-d81e0b1927-a2e8092dd8.zip/node_modules/picocolors/",\
@@ -7236,6 +7488,81 @@ const RAW_RUNTIME_STATE =
           ["nanoid", "npm:3.3.7"],\
           ["picocolors", "npm:1.0.0"],\
           ["source-map-js", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["postgres-array", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/postgres-array-npm-2.0.0-4f49dc1389-aff99e7971.zip/node_modules/postgres-array/",\
+        "packageDependencies": [\
+          ["postgres-array", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.2", {\
+        "packageLocation": "./.yarn/cache/postgres-array-npm-3.0.2-da6a3f1fed-0159517e4e.zip/node_modules/postgres-array/",\
+        "packageDependencies": [\
+          ["postgres-array", "npm:3.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["postgres-bytea", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/postgres-bytea-npm-1.0.0-8c2b81fa73-d844ae4ca7.zip/node_modules/postgres-bytea/",\
+        "packageDependencies": [\
+          ["postgres-bytea", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/postgres-bytea-npm-3.0.0-5de4c664f6-f5c01758fd.zip/node_modules/postgres-bytea/",\
+        "packageDependencies": [\
+          ["postgres-bytea", "npm:3.0.0"],\
+          ["obuf", "npm:1.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["postgres-date", [\
+      ["npm:1.0.7", {\
+        "packageLocation": "./.yarn/cache/postgres-date-npm-1.0.7-aadfe5531e-571ef45bec.zip/node_modules/postgres-date/",\
+        "packageDependencies": [\
+          ["postgres-date", "npm:1.0.7"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.0.1", {\
+        "packageLocation": "./.yarn/cache/postgres-date-npm-2.0.1-00e0e0bc9e-908eacec35.zip/node_modules/postgres-date/",\
+        "packageDependencies": [\
+          ["postgres-date", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["postgres-interval", [\
+      ["npm:1.2.0", {\
+        "packageLocation": "./.yarn/cache/postgres-interval-npm-1.2.0-ca6414744d-746b71f938.zip/node_modules/postgres-interval/",\
+        "packageDependencies": [\
+          ["postgres-interval", "npm:1.2.0"],\
+          ["xtend", "npm:4.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/postgres-interval-npm-3.0.0-936c769b98-c7a1cf006d.zip/node_modules/postgres-interval/",\
+        "packageDependencies": [\
+          ["postgres-interval", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["postgres-range", [\
+      ["npm:1.1.3", {\
+        "packageLocation": "./.yarn/cache/postgres-range-npm-1.1.3-46f68e1a9e-356a46d97e.zip/node_modules/postgres-range/",\
+        "packageDependencies": [\
+          ["postgres-range", "npm:1.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8119,6 +8446,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["split2", [\
+      ["npm:4.2.0", {\
+        "packageLocation": "./.yarn/cache/split2-npm-4.2.0-16aa3883ba-09bbefc11b.zip/node_modules/split2/",\
+        "packageDependencies": [\
+          ["split2", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["sprintf-js", [\
       ["npm:1.0.3", {\
         "packageLocation": "./.yarn/cache/sprintf-js-npm-1.0.3-73f0a322fa-c34828732a.zip/node_modules/sprintf-js/",\
@@ -8373,6 +8709,27 @@ const RAW_RUNTIME_STATE =
           ["readable-stream", "npm:3.6.2"]\
         ],\
         "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tarp_server", [\
+      ["workspace:packages/tarp_server", {\
+        "packageLocation": "./packages/tarp_server/",\
+        "packageDependencies": [\
+          ["tarp_server", "workspace:packages/tarp_server"],\
+          ["@trpc/server", "npm:10.44.1"],\
+          ["@types/cors", "npm:2.8.17"],\
+          ["@types/node", "npm:18.19.0"],\
+          ["@types/pg", "npm:8.10.9"],\
+          ["@types/ws", "npm:8.5.10"],\
+          ["cors", "npm:2.8.5"],\
+          ["drizzle-kit", "npm:0.20.6"],\
+          ["drizzle-orm", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:0.29.1"],\
+          ["pg", "virtual:9e7d3fb650a469813dc2d35ce3623f7a94fa24b761de81b47f905c7fcda3a492cb36411c11c73763ce00e9d88238c9e5d9cc2ef3d226907462a7435d2b412b70#npm:8.11.3"],\
+          ["tsx", "npm:4.6.1"],\
+          ["ws", "virtual:7aaba0840e0ee6eadcca7210be51518fefb68aaf25af4542b3878e6051bebbc8925f526f9c2583ab253931d328d3ccd62836c39bdeb3c996da725008c12e4d6c#npm:8.14.2"],\
+          ["zod", "npm:3.22.4"]\
+        ],\
+        "linkType": "SOFT"\
       }]\
     ]],\
     ["text-table", [\
@@ -9088,6 +9445,15 @@ const RAW_RUNTIME_STATE =
           "@types/utf-8-validate",\
           "bufferutil",\
           "utf-8-validate"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["xtend", [\
+      ["npm:4.0.2", {\
+        "packageLocation": "./.yarn/cache/xtend-npm-4.0.2-7f2375736e-ac5dfa738b.zip/node_modules/xtend/",\
+        "packageDependencies": [\
+          ["xtend", "npm:4.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\

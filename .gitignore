@@ -7,3 +7,5 @@
 !.yarn/cache
 
 sqlite.db
+
+node_modules

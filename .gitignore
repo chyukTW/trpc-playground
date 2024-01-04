@@ -9,3 +9,5 @@
 sqlite.db
 
 node_modules
+
+.env

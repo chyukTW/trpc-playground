@@ -1,17 +1,16 @@
-// import { pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
+import dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 import { Client } from 'pg';
 
-// DATABASE_URL = 'postgresql://postgres:postgres@localhost:5455/postgres';
+dotenv.config();
 
 const client = new Client({
-  database: 'postgres',
-  // host: '0.0.0.1',
-  host: 'localhost',
-  password: 'postgres',
-  port: 5455,
-  user: 'postgres',
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT as unknown as number,
+  user: process.env.DB_USER,
 });
 
 client

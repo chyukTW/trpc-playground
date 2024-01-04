@@ -8,6 +8,7 @@ export const Home = () => {
         <Link to='/trpc'>tRPC</Link>
         <Link to='/sse'>Server Sent Event</Link>
         <Link to='/apollo'>Apollo</Link>
+        <Link to='/tarp'>TARP Client</Link>
       </nav>
     </div>
   );

@@ -1,7 +1,11 @@
 import { initTRPC } from '@trpc/server';
+import EventEmitter from 'events';
 import { z } from 'zod';
 
 import { getAllMissions, getAllWorkspaces } from '../db';
+
+// custom event
+const event = new EventEmitter();
 
 // context
 export const createContext = async () => ({ event });

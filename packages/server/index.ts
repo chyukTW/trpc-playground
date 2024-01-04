@@ -19,5 +19,7 @@ applyWSSHandler<AppRouter>({ createContext, router: appRouter, wss });
 // run server
 listen(2022);
 
+console.log('listening on ' + 2022);
+
 // export router type
 export type AppRouter = typeof appRouter;

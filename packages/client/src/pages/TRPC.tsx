@@ -67,9 +67,11 @@ const Input = () => {
   );
 };
 
-export const TRPC = () => {  
+export const TRPC = () => {
+  const client = trpcClient();
+
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+    <trpc.Provider client={client} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <Chats />
         <Input />
@@ -77,6 +79,3 @@ export const TRPC = () => {
     </trpc.Provider>   
   );
 };
-
-
-

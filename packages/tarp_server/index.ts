@@ -8,6 +8,8 @@ import { appRouter, createContext } from './router';
 
 dotenv.config();
 
+const { PORT } = process.env;
+
 // create http server instance
 const { listen, server } = createHTTPServer({
   createContext,
@@ -20,7 +22,9 @@ const wss = new WebSocketServer({ server });
 applyWSSHandler<AppRouter>({ createContext, router: appRouter, wss });
 
 // run server
-listen(process.env.PORT as unknown as number);
+listen(PORT);
+
+console.log('listening on ' + PORT);
 
 // export router type
 export type AppRouter = typeof appRouter;

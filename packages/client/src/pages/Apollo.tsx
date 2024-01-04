@@ -94,8 +94,10 @@ const Input = () => {
 };
 
 export const Apollo = () => {  
+  const client = apolloClient();
+  
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <Chats />
       <Input />
     </ApolloProvider>

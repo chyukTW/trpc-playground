@@ -1,7 +1,7 @@
 import { initTRPC } from '@trpc/server';
 import { z } from 'zod';
 
-import { sayHello } from '../db';
+import { getAllMissions, getAllWorkspaces } from '../db';
 
 // context
 export const createContext = async () => ({ event });
@@ -15,6 +15,12 @@ const { procedure, router } = t;
 // routers
 export const appRouter = router({
   hello: procedure.input(z.object({ name: z.string() })).query(({ input: { name } }) => {
-    return sayHello(name);
+    return JSON.parse(`hello ${name}`);
+  }),
+  missions: procedure.query(() => {
+    return getAllMissions();
+  }),
+  workspaces: procedure.query(() => {
+    return getAllWorkspaces();
   }),
 });

@@ -5,26 +5,30 @@ import { Client } from 'pg';
 
 dotenv.config();
 
-const client = new Client({
-  database: process.env.DB_NAME,
-  host: process.env.DB_HOST,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT as unknown as number,
-  user: process.env.DB_USER,
+const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } = process.env;
+
+const pg = new Client({
+  database: DB_NAME,
+  host: DB_HOST,
+  password: DB_PASSWORD,
+  port: DB_PORT,
+  user: DB_USER,
 });
 
-client
-  .connect()
-  .then(() => {
-    const db = drizzle(client);
+(async () => {
+  try {
+    await pg.connect();
+  } catch {
+    console.error('DB 연동 중 에러 발생');
+  }
+})();
 
-    return db.select().from(pgTable('workspace', { id: serial('id'), name: text('name') }));
-  })
-  .then((res) => {
-    console.log(res);
-  });
+const db = drizzle(pg);
 
-export const sayHello = async (name: string) => {
-  // await db.insert(messages).values({ message });
-  console.log('hello ', name);
+export const getAllWorkspaces = async () => {
+  return db.select().from(pgTable('workspace', { id: serial('id'), name: text('name') }));
+};
+
+export const getAllMissions = async () => {
+  return db.select().from(pgTable('mission', { id: serial('id') }));
 };

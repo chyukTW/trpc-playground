@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
+import { and, gte, lte } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { Client } from 'pg';
 
 dotenv.config();
@@ -30,5 +31,21 @@ export const getAllWorkspaces = async () => {
 };
 
 export const getAllMissions = async () => {
-  return db.select().from(pgTable('mission', { id: serial('id') }));
+  return db.select().from(pgTable('mission', { date: timestamp('date'), id: serial('id') }));
 };
+
+export const getMissions = async ({ end, start }: { end: Date; start: Date }) => {
+  const table = pgTable('mission', { date: timestamp('date'), id: serial('id') });
+
+  return db
+    .select()
+    .from(table)
+    .where(and(gte(table.date, start), lte(table.date, end)));
+};
+
+getAllMissions().then((res) => console.log(res));
+
+getMissions({
+  end: new Date('2024-01-11T00:00:00.000Z'),
+  start: new Date('2024-01-01T00:00:00.000Z'),
+}).then((res) => console.log(res));

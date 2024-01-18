@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; // main style file
 
 import { Apollo } from './pages/Apollo';
 import { Home } from './pages/Home';

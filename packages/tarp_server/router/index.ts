@@ -2,7 +2,7 @@ import { initTRPC } from '@trpc/server';
 import EventEmitter from 'events';
 import { z } from 'zod';
 
-import { getAllWorkspaces, getMissions } from '../db';
+import { getAllWorkspaces, getMissions, getMissionsBySQL } from '../db';
 
 // custom event
 const event = new EventEmitter();
@@ -32,6 +32,23 @@ export const appRouter = router({
     )
     .query(({ input: { end, limit, offset, start } }) => {
       return getMissions({
+        end: end ? new Date(end) : undefined,
+        limit,
+        offset,
+        start: start ? new Date(start) : undefined,
+      });
+    }),
+  missions2: procedure
+    .input(
+      z.object({
+        end: z.string().datetime().optional(),
+        limit: z.number().optional(),
+        offset: z.number().optional(),
+        start: z.string().datetime().optional(),
+      }),
+    )
+    .query(({ input: { end, limit, offset, start } }) => {
+      return getMissionsBySQL({
         end: end ? new Date(end) : undefined,
         limit,
         offset,

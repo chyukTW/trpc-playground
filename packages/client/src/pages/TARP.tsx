@@ -4,13 +4,53 @@ import { useState } from 'react';
 import { queryClient, tarpClient } from '../client';
 import { tarp } from '../tarp';
 
+type MissionType = {
+  date: null | string;
+  eventTime: null | string;
+  id: number;
+  info?: unknown;
+  roadMapId: number;
+}
+
+
 const Missions = () => {
   const [start, setStart] = useState<string>();
   const [end, setEnd] = useState<string>();
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
+  const [missions, setMissions] = useState<MissionType[]>();
 
-  const response = tarp.missions.useQuery({ end: start ? end: undefined, limit: limit || 10, offset, start: end ? start : undefined });
+  const { refetch } = tarp.missions.useQuery({ 
+    end: start ? end: undefined,
+    limit: limit || 10,
+    offset, 
+    start: end ? start : undefined,
+  }, 
+  { enabled: false });
+
+  const { refetch: refetch2 } = tarp.missions2.useQuery({ 
+    end: start ? end: undefined,
+    limit: limit || 10,
+    offset, 
+    start: end ? start : undefined,
+  }, 
+  { enabled: false });
+
+  const fetchMissions = () => {
+    console.time(`🌀 fetch-${limit}-ORM`);
+    refetch().then((response)=> {
+      setMissions(response.data);
+      console.timeEnd(`🌀 fetch-${limit}-ORM`);
+    });
+  };
+
+  const fetchMissionsBySQL = () => {
+    console.time(`🍎 fetch-${limit}`);
+    refetch2().then((response)=> {
+      setMissions(response.data);
+      console.timeEnd(`🍎 fetch-${limit}`);
+    });
+  };
 
   return (
     <div>
@@ -23,10 +63,12 @@ const Missions = () => {
         start: <input onChange={(e) => setStart(new Date(e.target.value).toISOString())} type='date'/>
         {' / '}
         end: <input onChange={(e) => setEnd(new Date(e.target.value).toISOString())} type='date'/>
+        <button onClick={fetchMissions}>fetch !</button>
+        <button onClick={fetchMissionsBySQL}>fetch(sql)!</button>
       </div>
       <ul>
         {
-          response?.data?.map(({date, id, roadMapId})=> {
+          missions?.map(({date, id, roadMapId})=> {
             return (
               <li key={id}>
                 <div>

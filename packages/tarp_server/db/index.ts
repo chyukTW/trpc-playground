@@ -1,20 +1,22 @@
 import dotenv from 'dotenv';
 import { and, gte, lte } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { jsonb, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { Client } from 'pg';
 
 dotenv.config();
 
 const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } = process.env;
 
-const pg = new Client({
+const opts = {
   database: DB_NAME,
   host: DB_HOST,
   password: DB_PASSWORD,
   port: DB_PORT,
   user: DB_USER,
-});
+};
+
+const pg = new Client(opts);
 
 (async () => {
   try {
@@ -49,10 +51,9 @@ export const getMissions = async ({
     date: timestamp('date'),
     eventTime: timestamp('event_time'),
     id: serial('id'),
+    info: jsonb('info'),
     roadMapId: serial('road_map_id'),
   });
-
-  console.log(start, end, offset, limit);
 
   return db
     .select()
@@ -61,3 +62,118 @@ export const getMissions = async ({
     .offset(offset)
     .where(and(gte(table.date, start), lte(table.date, end)));
 };
+
+export const getMissionsBySQL = async ({
+  end = new Date(),
+  limit = 10,
+  offset = 0,
+  start = new Date(),
+}: {
+  end?: Date;
+  limit?: number;
+  offset?: number;
+  start?: Date;
+}) => {
+  const res = await pg.query(
+    `
+      select id, date, event_time, road_map_id, info
+      from mission
+      where date >= $1 AND date < $2
+      order by id
+      limit $3
+      offset $4
+      `,
+    [start, end, limit, offset],
+  );
+
+  return res.rows;
+};
+
+// test area
+
+export async function testDrizzlePerformance(rows: number) {
+  const pg = new Client(opts);
+
+  (async () => {
+    try {
+      await pg.connect();
+    } catch {
+      console.error('DB 연동 중 에러 발생');
+    }
+  })();
+
+  const db = drizzle(pg);
+
+  try {
+    console.time(`🌀 query by drizzle ORM: ${rows}-rows`);
+
+    const table = pgTable('mission', {
+      date: timestamp('date'),
+      eventTime: timestamp('event_time'),
+      id: serial('id'),
+      info: jsonb('info'),
+      roadMapId: serial('road_map_id'),
+    });
+
+    const res = await db
+      .select()
+      .from(table)
+      .limit(rows)
+      .offset(0)
+      .where(and(gte(table.date, new Date('2024-01-01')), lte(table.date, new Date('2024-01-30'))));
+
+    console.timeEnd(`🌀 query by drizzle ORM: ${rows}-rows`);
+
+    console.log(`len of result: ${res.length}`);
+  } catch (error) {
+    console.error('Error during query execution:', error);
+  } finally {
+    await pg.end();
+  }
+}
+
+// testDrizzlePerformance(1000);
+// testDrizzlePerformance(10000);
+// testDrizzlePerformance(50000);
+// testDrizzlePerformance(100000);
+
+export async function testSQLPerformance(rows: number) {
+  const pg = new Client(opts);
+
+  (async () => {
+    try {
+      await pg.connect();
+    } catch {
+      console.error('DB 연동 중 에러 발생');
+    }
+  })();
+
+  try {
+    console.time(`🍎 query by SQL: ${rows}-rows`);
+
+    const res = await pg.query(
+      `
+        select id, date, event_time, road_map_id, info 
+        from mission
+        where date >= $1 AND date < $2
+        order by id
+        limit $3
+        offset 0
+        `,
+      [new Date('2024-01-01'), new Date('2024-01-30'), rows],
+    );
+
+    console.timeEnd(`🍎 query by SQL: ${rows}-rows`);
+
+    console.log(`len of result: ${res.rowCount}`);
+  } catch (error) {
+    console.error('Error during query execution:', error);
+  } finally {
+    await pg.end();
+  }
+}
+
+// testSQLPerformance(1000);
+// testSQLPerformance(10000);
+// testSQLPerformance(50000);
+// testSQLPerformance(100000);

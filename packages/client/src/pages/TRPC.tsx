@@ -27,7 +27,7 @@ const Chats = () => {
   return (
     <div>
       {
-        messages?.map(({ id, message,timestamp })=> {
+        messages?.map(({ id, message, timestamp })=> {
           return (
             <p key={id}>
               {message}

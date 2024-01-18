@@ -45,7 +45,14 @@ export const getMissions = async ({
   offset?: number;
   start?: Date;
 }) => {
-  const table = pgTable('mission', { date: timestamp('date'), id: serial('id') });
+  const table = pgTable('mission', {
+    date: timestamp('date'),
+    eventTime: timestamp('event_time'),
+    id: serial('id'),
+    roadMapId: serial('road_map_id'),
+  });
+
+  console.log(start, end, offset, limit);
 
   return db
     .select()
